@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - BreakMate</title>
+  <meta name="description" content="BreakMate Privacy Policy. BreakMate is 100% offline, collects no data, and requires no accounts.">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <link rel="canonical" href="https://aleapc.github.io/breakmate/privacy.html">
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #d0d0d0;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 16px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(26, 26, 46, 0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: 700;
+      color: #4A90D9;
+      text-decoration: none;
+    }
+
+    .logo img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .back-link {
+      color: #4A90D9;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .back-link:hover { color: #6BB5FF; }
+
+    /* Language Selector */
+    .lang-selector { position: relative; }
+    .lang-btn {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; padding: 6px 12px; cursor: pointer;
+      color: #ccc; font-size: 13px; font-family: inherit; transition: all 0.3s;
+    }
+    .lang-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
+    .lang-flag { font-size: 18px; line-height: 1; }
+    .lang-code { font-weight: 600; }
+    .lang-arrow { font-size: 10px; opacity: 0.6; transition: transform 0.3s; }
+    .lang-dropdown {
+      position: absolute; top: calc(100% + 8px); right: 0;
+      background: #1a1a2e; border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px; padding: 6px; min-width: 180px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: all 0.2s; z-index: 200; max-height: 320px; overflow-y: auto;
+    }
+    .lang-dropdown.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .lang-option {
+      display: flex; align-items: center; gap: 10px; width: 100%;
+      padding: 8px 12px; border: none; background: none; color: #ccc;
+      font-size: 13px; font-family: inherit; cursor: pointer;
+      border-radius: 8px; transition: all 0.2s; text-align: left;
+    }
+    .lang-option:hover { background: rgba(74,144,217,0.15); color: #fff; }
+    .lang-option.active { background: rgba(74,144,217,0.2); color: #4A90D9; font-weight: 600; }
+
+    /* Content */
+    .privacy-content {
+      padding: 120px 0 60px;
+    }
+
+    .privacy-content h1 {
+      font-size: 36px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .last-updated {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 40px;
+    }
+
+    .privacy-content h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      margin-top: 36px;
+      margin-bottom: 12px;
+    }
+
+    .privacy-content p {
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .privacy-content ul {
+      margin-bottom: 16px;
+      padding-left: 24px;
+    }
+
+    .privacy-content li {
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 6px;
+    }
+
+    .highlight-box {
+      background: rgba(103, 178, 111, 0.08);
+      border: 1px solid rgba(103, 178, 111, 0.25);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+
+    .highlight-box p {
+      color: #b0d0b0;
+      margin-bottom: 0;
+    }
+
+    .highlight-box strong {
+      color: #67B26F;
+    }
+
+    code {
+      background: rgba(255,255,255,0.08);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #6BB5FF;
+    }
+
+    /* Footer */
+    footer {
+      padding: 30px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      text-align: center;
+    }
+
+    footer p {
+      color: #555;
+      font-size: 13px;
+    }
+
+    /* RTL Support */
+    [dir="rtl"] .header-content { flex-direction: row-reverse; }
+    [dir="rtl"] .header-right { flex-direction: row-reverse; }
+    [dir="rtl"] .lang-dropdown { right: auto; left: 0; }
+    [dir="rtl"] .privacy-content ul { padding-left: 0; padding-right: 24px; }
+
+    @media (max-width: 768px) {
+      .privacy-content h1 { font-size: 28px; }
+      .privacy-content { padding: 100px 0 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <a href="index.html" class="logo">
+        <img src="store-logo.png" alt="BreakMate" width="36" height="36">
+        BreakMate
+      </a>
+      <div class="header-right">
+        <a href="index.html" class="back-link" data-i18n="back">&larr; Back to Home</a>
+        <div class="lang-selector">
+          <button class="lang-btn" id="lang-toggle">
+            <span class="lang-flag" id="lang-flag">🇬🇧</span>
+            <span class="lang-code" id="lang-code">EN</span>
+            <span class="lang-arrow">▼</span>
+          </button>
+          <div class="lang-dropdown" id="lang-dropdown"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="privacy-content">
+      <h1 data-i18n="pp.title">Privacy Policy</h1>
+      <p class="last-updated" data-i18n="pp.updated">Last updated: February 16, 2026</p>
+
+      <div class="highlight-box">
+        <p data-i18n-html="pp.summary"><strong>In short:</strong> BreakMate does not collect, store, or transmit any personal data. The application works entirely offline and requires no accounts, no internet connection, and no permissions beyond basic desktop access.</p>
+      </div>
+
+      <h2 data-i18n="pp.s1.title">1. Overview</h2>
+      <p data-i18n="pp.s1.text">BreakMate is a desktop application for Windows that provides health reminders (eye rest, hydration, posture, movement, and stretching). This privacy policy explains how BreakMate handles your data.</p>
+
+      <h2 data-i18n="pp.s2.title">2. Data Collection</h2>
+      <p data-i18n-html="pp.s2.text">BreakMate does <strong>not</strong> collect any personal data. Specifically:</p>
+      <ul>
+        <li data-i18n="pp.s2.l1">No personal information is collected (name, email, phone, etc.)</li>
+        <li data-i18n="pp.s2.l2">No usage analytics or telemetry are collected</li>
+        <li data-i18n="pp.s2.l3">No browsing data or activity is tracked</li>
+        <li data-i18n="pp.s2.l4">No location data is accessed</li>
+        <li data-i18n="pp.s2.l5">No device identifiers are collected</li>
+        <li data-i18n="pp.s2.l6">No crash reports are sent</li>
+      </ul>
+
+      <h2 data-i18n="pp.s3.title">3. Network Activity</h2>
+      <p data-i18n-html="pp.s3.text">BreakMate operates <strong>100% offline</strong>. The application makes zero network requests. It does not connect to any servers, APIs, or cloud services. No internet connection is required to use BreakMate.</p>
+
+      <h2 data-i18n="pp.s4.title">4. Local Data Storage</h2>
+      <p data-i18n="pp.s4.text">BreakMate stores a small amount of data locally on your device to remember your preferences:</p>
+      <ul>
+        <li data-i18n-html="pp.s4.l1"><strong>Settings:</strong> Reminder intervals, language preference, and display options</li>
+        <li data-i18n-html="pp.s4.l2"><strong>Statistics:</strong> Daily reminder counts and water intake tracking</li>
+        <li data-i18n-html="pp.s4.l3"><strong>Registry:</strong> Installation path and autostart preference</li>
+      </ul>
+      <p data-i18n="pp.s4.text2">All data is stored in the following locations:</p>
+      <ul>
+        <li>Application files: <code>%LOCALAPPDATA%\BreakMate\</code></li>
+        <li>Registry keys: <code>HKCU\Software\BreakMate</code></li>
+        <li>Autostart entry: <code>HKCU\Software\Microsoft\Windows\CurrentVersion\Run\BreakMate</code></li>
+      </ul>
+
+      <h2 data-i18n="pp.s5.title">5. Third-Party Services</h2>
+      <p data-i18n="pp.s5.text">BreakMate does not integrate with any third-party services, SDKs, or analytics platforms. The application does not include any advertising frameworks.</p>
+
+      <h2 data-i18n="pp.s6.title">6. Cookies</h2>
+      <p data-i18n="pp.s6.text">BreakMate does not use cookies. The application does not run in a browser context and does not store or access browser cookies.</p>
+
+      <h2 data-i18n="pp.s7.title">7. Accounts &amp; Authentication</h2>
+      <p data-i18n="pp.s7.text">BreakMate does not require any account creation, login, or authentication. There is no user registration process.</p>
+
+      <h2 data-i18n="pp.s8.title">8. Children's Privacy</h2>
+      <p data-i18n="pp.s8.text">BreakMate does not collect any personal data from anyone, including children. The application is safe for users of all ages.</p>
+
+      <h2 data-i18n="pp.s9.title">9. Data Deletion</h2>
+      <p data-i18n="pp.s9.text">Since all data is stored locally on your device, you have complete control over it:</p>
+      <ul>
+        <li data-i18n-html="pp.s9.l1"><strong>Uninstall the application</strong> to remove all BreakMate data from your device</li>
+        <li>Silent uninstall: <code>"%LOCALAPPDATA%\BreakMate\uninstall.exe" /S</code></li>
+        <li data-i18n="pp.s9.l3">The uninstaller removes all application files and registry entries</li>
+      </ul>
+
+      <h2 data-i18n="pp.s10.title">10. Changes to This Policy</h2>
+      <p data-i18n="pp.s10.text">If we make changes to this privacy policy, we will update the "Last updated" date at the top. Since BreakMate does not collect any data, significant changes to this policy are unlikely.</p>
+
+      <h2 data-i18n="pp.s11.title">11. Contact</h2>
+      <p data-i18n-html="pp.s11.text">If you have any questions about this privacy policy or BreakMate's data practices, you can open an issue on our <a href="https://github.com/aleapc/breakmate/issues" target="_blank" rel="noopener" style="color:#4A90D9;">GitHub page</a>.</p>
+
+      <div class="highlight-box">
+        <p data-i18n-html="pp.commitment"><strong>Our commitment:</strong> BreakMate was built with privacy as a core principle. We believe your health data and personal information belong to you alone. That's why we designed BreakMate to work entirely offline, with zero data collection.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p data-i18n="pp.footer">&copy; 2025&ndash;2026 BreakMate. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="privacy-i18n.js"></script>
+
+</body>
+</html>

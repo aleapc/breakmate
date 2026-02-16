@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BreakMate - Your Desktop Health Guardian</title>
+  <meta name="description" content="BreakMate is a charming pixel-art desktop companion that protects your well-being with smart reminders for eye rest, hydration, posture, movement and stretching. 7-day free trial, $2.99 one-time purchase.">
+  <meta name="keywords" content="break reminder, eye rest 20-20-20, desktop pet, health reminder, posture reminder, water tracker, ergonomic, workplace health">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <link rel="canonical" href="https://aleapc.github.io/breakmate/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="store-logo.png">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="BreakMate - Your Desktop Health Guardian">
+  <meta property="og:description" content="A friendly pixel-art desktop pet that cares for your health with smart reminders. 7-day free trial, $2.99 one-time.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aleapc.github.io/breakmate">
+  <meta property="og:image" content="https://aleapc.github.io/breakmate/og-image.png">
+  <meta property="og:image:width" content="1920">
+  <meta property="og:image:height" content="1080">
+  <meta property="og:site_name" content="BreakMate">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BreakMate - Your Desktop Health Guardian">
+  <meta name="twitter:description" content="A friendly pixel-art desktop pet that cares for your health with smart reminders. 7-day free trial, $2.99 one-time.">
+  <meta name="twitter:image" content="https://aleapc.github.io/breakmate/og-image.png">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "BreakMate",
+    "description": "A desktop pet companion that reminds you to take breaks, drink water, maintain good posture, and stretch.",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Windows 10+",
+    "offers": {
+      "@type": "Offer",
+      "price": "2.99",
+      "priceCurrency": "USD"
+    },
+    "screenshot": "https://aleapc.github.io/breakmate/og-image.png",
+    "softwareVersion": "1.4.8",
+    "fileSize": "4MB",
+    "inLanguage": ["en","zh-CN","hi","es","fr","ar","bn","pt-BR","ru","ja","it","de","ko","nl","tr"]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ==================== HEADER ==================== */
+    header {
+      padding: 16px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(26, 26, 46, 0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: 700;
+      color: #4A90D9;
+      text-decoration: none;
+    }
+
+    .logo img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: #fff; }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* ==================== HERO ==================== */
+    .hero {
+      padding: 130px 0 40px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 18px;
+      background: rgba(74, 144, 217, 0.15);
+      border: 1px solid rgba(74, 144, 217, 0.3);
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #6BB5FF;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 5.5vw, 60px);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #4A90D9, #67B26F);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #b0b0b0;
+      max-width: 620px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 15px 30px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #4A90D9, #357ABD);
+      color: white;
+      box-shadow: 0 8px 25px rgba(74, 144, 217, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(74, 144, 217, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .hero-sub-cta {
+      margin-top: 16px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    .hero-sub-cta strong {
+      color: #67B26F;
+    }
+
+    /* Mascot */
+    .mascot-container {
+      margin: 50px auto 0;
+      max-width: 240px;
+    }
+
+    .mascot-canvas {
+      width: 100%;
+      image-rendering: pixelated;
+      animation: bounce 2.5s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .mascot-label {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #6BB5FF;
+      font-weight: 500;
+      min-height: 20px;
+    }
+
+    /* ==================== TRUST BADGES ==================== */
+    .trust-badges {
+      padding: 40px 0;
+    }
+
+    .badges-row {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .badge-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #ccc;
+    }
+
+    .badge-pill .badge-icon {
+      font-size: 16px;
+    }
+
+    /* ==================== FEATURES ==================== */
+    .features { padding: 60px 0; }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(28px, 4vw, 36px);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 16px;
+      color: #888;
+      margin-bottom: 50px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 28px;
+      transition: all 0.3s;
+    }
+
+    .feature-card:hover {
+      background: rgba(255, 255, 255, 0.07);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(74, 144, 217, 0.1);
+    }
+
+    .feature-icon { font-size: 36px; margin-bottom: 14px; }
+    .feature-card h3 { font-size: 18px; margin-bottom: 8px; }
+    .feature-card p { color: #aaa; font-size: 14px; line-height: 1.6; }
+
+    /* ==================== APP PREVIEW / SCREENSHOTS ==================== */
+    .app-preview {
+      padding: 80px 0;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .preview-window {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .preview-titlebar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 12px;
+      color: #888;
+    }
+
+    .preview-dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .preview-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .preview-dots span:nth-child(1) { background: #ff5f56; }
+    .preview-dots span:nth-child(2) { background: #ffbd2e; }
+    .preview-dots span:nth-child(3) { background: #27c93f; }
+
+    .preview-body {
+      padding: 20px;
+    }
+
+    /* Notification mockup */
+    .notif-mockup {
+      background: rgba(255,255,255,0.95);
+      border-radius: 10px;
+      padding: 16px;
+      color: #333;
+      max-width: 320px;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .notif-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: #666;
+      font-weight: 600;
+    }
+
+    .notif-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 4px;
+    }
+
+    .notif-text {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 12px;
+    }
+
+    .notif-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .notif-btn {
+      padding: 6px 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      border: none;
+      cursor: default;
+    }
+
+    .notif-btn-done {
+      background: #2ECC71;
+      color: white;
+    }
+
+    .notif-btn-snooze {
+      background: #ecf0f1;
+      color: #666;
+    }
+
+    /* Settings mockup */
+    .settings-mockup {
+      background: rgba(255,255,255,0.95);
+      border-radius: 10px;
+      padding: 16px;
+      color: #333;
+    }
+
+    .settings-mockup h4 {
+      font-size: 14px;
+      margin-bottom: 12px;
+      color: #222;
+    }
+
+    .setting-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 13px;
+    }
+
+    .setting-label { color: #555; }
+
+    .setting-value {
+      background: #4A90D9;
+      color: white;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* Water tracker mockup */
+    .water-mockup {
+      text-align: center;
+      padding: 10px;
+    }
+
+    .water-glasses {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin: 12px 0;
+    }
+
+    .water-glass {
+      width: 28px;
+      height: 36px;
+      border: 2px solid #3498DB;
+      border-radius: 0 0 6px 6px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .water-glass.filled::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: linear-gradient(to top, #3498DB, #5DADE2);
+    }
+
+    .water-glass.half::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: linear-gradient(to top, #3498DB, #5DADE2);
+    }
+
+    .water-count {
+      font-size: 24px;
+      font-weight: 700;
+      color: #3498DB;
+    }
+
+    .water-label {
+      font-size: 12px;
+      color: #888;
+    }
+
+    /* Tray mockup */
+    .tray-mockup {
+      text-align: center;
+    }
+
+    .tray-menu {
+      background: rgba(255,255,255,0.95);
+      border-radius: 8px;
+      padding: 4px 0;
+      display: inline-block;
+      min-width: 160px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      text-align: left;
+    }
+
+    .tray-item {
+      padding: 8px 16px;
+      font-size: 13px;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tray-item:hover {
+      background: rgba(74, 144, 217, 0.1);
+    }
+
+    .tray-sep {
+      height: 1px;
+      background: #eee;
+      margin: 4px 0;
+    }
+
+    /* ==================== HOW IT WORKS ==================== */
+    .how-it-works {
+      padding: 80px 0;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .step-card {
+      text-align: center;
+      position: relative;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #4A90D9, #357ABD);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      margin: 0 auto 16px;
+    }
+
+    .step-sprite {
+      margin: 0 auto 16px;
+      image-rendering: pixelated;
+    }
+
+    .step-card h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .step-card p {
+      font-size: 13px;
+      color: #aaa;
+      line-height: 1.5;
+    }
+
+    /* Connector arrows between steps */
+    .step-card:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 80px;
+      right: -18px;
+      width: 6px;
+      height: 6px;
+      border-right: 2px solid rgba(74, 144, 217, 0.4);
+      border-bottom: 2px solid rgba(74, 144, 217, 0.4);
+      transform: rotate(-45deg);
+    }
+
+    /* ==================== PERFECT FOR ==================== */
+    .perfect-for {
+      padding: 60px 0;
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+
+    .audience-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .audience-card:hover {
+      background: rgba(255, 255, 255, 0.07);
+      transform: translateY(-4px);
+    }
+
+    .audience-icon { font-size: 40px; margin-bottom: 14px; }
+    .audience-card h3 { font-size: 17px; margin-bottom: 8px; }
+    .audience-card p { color: #aaa; font-size: 14px; line-height: 1.5; }
+
+    /* ==================== LANGUAGES ==================== */
+    .languages {
+      padding: 50px 0;
+      text-align: center;
+    }
+
+    .languages h2 {
+      font-size: 22px;
+      margin-bottom: 24px;
+      color: #999;
+      font-weight: 600;
+    }
+
+    .language-flags {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 30px;
+    }
+
+    .language-flags span {
+      transition: transform 0.2s;
+      cursor: default;
+    }
+
+    .language-flags span:hover {
+      transform: scale(1.3);
+    }
+
+    /* ==================== PRIVACY CALLOUT ==================== */
+    .privacy-callout {
+      padding: 60px 0;
+    }
+
+    .privacy-card {
+      max-width: 700px;
+      margin: 0 auto;
+      background: rgba(103, 178, 111, 0.06);
+      border: 1px solid rgba(103, 178, 111, 0.25);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .privacy-card .privacy-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .privacy-card h2 {
+      font-size: 26px;
+      margin-bottom: 12px;
+    }
+
+    .privacy-card p {
+      color: #b0b0b0;
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    .privacy-features {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .privacy-feat {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: #67B26F;
+      font-weight: 500;
+    }
+
+    /* ==================== PRICING ==================== */
+    .pricing {
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .price-card {
+      max-width: 420px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(74, 144, 217, 0.12), rgba(103, 178, 111, 0.12));
+      border: 2px solid rgba(74, 144, 217, 0.4);
+      border-radius: 24px;
+      padding: 40px;
+    }
+
+    .price-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(103, 178, 111, 0.2);
+      border-radius: 12px;
+      font-size: 12px;
+      color: #67B26F;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .price {
+      font-size: 52px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .price-note {
+      color: #aaa;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    .price-trial {
+      color: #67B26F;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 28px;
+    }
+
+    .price-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 28px;
+    }
+
+    .price-features li {
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .price-features li::before {
+      content: '\2713';
+      color: #67B26F;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    /* ==================== FAQ ==================== */
+    .faq {
+      padding: 60px 0;
+    }
+
+    .faq-list {
+      max-width: 700px;
+      margin: 40px auto 0;
+    }
+
+    details {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    details[open] {
+      border-color: rgba(74, 144, 217, 0.3);
+    }
+
+    summary {
+      padding: 18px 24px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 15px;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.2s;
+    }
+
+    summary:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    summary::after {
+      content: '+';
+      font-size: 20px;
+      color: #4A90D9;
+      font-weight: 400;
+      transition: transform 0.2s;
+    }
+
+    details[open] summary::after {
+      content: '\2212';
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    .faq-answer {
+      padding: 0 24px 18px;
+      color: #b0b0b0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* ==================== FOOTER ==================== */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-left p {
+      color: #555;
+      font-size: 13px;
+    }
+
+    .footer-left .sys-req {
+      font-size: 11px;
+      color: #444;
+      margin-top: 4px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: #666;
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: #4A90D9; }
+
+    /* ==================== LANGUAGE SELECTOR ==================== */
+    .lang-selector {
+      position: relative;
+    }
+
+    .lang-btn {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 6px 12px;
+      color: #ccc;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .lang-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+    .lang-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: rgba(26, 26, 46, 0.97);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 8px;
+      min-width: 180px;
+      max-height: 360px;
+      overflow-y: auto;
+      z-index: 200;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+
+    .lang-dropdown.open { display: block; }
+
+    .lang-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      color: #bbb;
+      transition: all 0.15s;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-family: inherit;
+    }
+
+    .lang-option:hover { background: rgba(74,144,217,0.15); color: #fff; }
+    .lang-option.active { background: rgba(74,144,217,0.2); color: #6BB5FF; font-weight: 600; }
+
+    .lang-dropdown::-webkit-scrollbar { width: 4px; }
+    .lang-dropdown::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
+
+    /* RTL support */
+    [dir="rtl"] .header-content { flex-direction: row-reverse; }
+    [dir="rtl"] .price-features { text-align: right; }
+    [dir="rtl"] .tray-menu { text-align: right; }
+    [dir="rtl"] .setting-row { flex-direction: row-reverse; }
+    [dir="rtl"] .faq-answer { text-align: right; }
+    [dir="rtl"] summary { flex-direction: row-reverse; }
+    [dir="rtl"] .footer-content { flex-direction: row-reverse; }
+
+    /* ==================== ANIMATIONS ==================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==================== MOBILE ==================== */
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(26, 26, 46, 0.97);
+        backdrop-filter: blur(12px);
+        flex-direction: column;
+        padding: 16px 20px;
+        gap: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+
+      .nav-links.active { display: flex; }
+
+      .nav-links li {
+        border-bottom: 1px solid rgba(255,255,255,0.04);
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 14px 0;
+        font-size: 16px;
+      }
+
+      .hero { padding: 110px 0 30px; }
+      .hero h1 { font-size: 30px; }
+      .hero p { font-size: 15px; }
+
+      .cta-buttons {
+        flex-direction: column;
+        padding: 0 10px;
+      }
+
+      .btn { width: 100%; justify-content: center; }
+
+      .steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .step-card::after { display: none; }
+
+      .preview-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .badges-row { gap: 10px; }
+      .badge-pill { padding: 8px 14px; font-size: 12px; }
+    }
+
+    @media (max-width: 480px) {
+      .steps-grid { grid-template-columns: 1fr; }
+      .language-flags { font-size: 26px; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header>
+    <div class="container header-content">
+      <a href="#" class="logo">
+        <img src="store-logo.png" alt="BreakMate" width="36" height="36">
+        BreakMate
+      </a>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="lang-selector">
+          <button class="lang-btn" id="lang-btn" aria-label="Change language">
+            <span id="lang-flag">&#127468;&#127463;</span>
+            <span id="lang-code">EN</span>
+            <span style="font-size:10px;">&#9660;</span>
+          </button>
+          <div class="lang-dropdown" id="lang-dropdown"></div>
+        </div>
+        <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#features" data-i18n="nav.features">Features</a></li>
+          <li><a href="#preview" data-i18n="nav.preview">Preview</a></li>
+          <li><a href="#pricing" data-i18n="nav.pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="https://apps.microsoft.com/detail/PLACEHOLDER_STORE_ID" target="_blank" rel="noopener" data-i18n="nav.download">Download</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-badge" data-i18n="hero.badge">&#127881; Available on Microsoft Store &mdash; 7-day free trial</div>
+        <h1 data-i18n-html="hero.title">Your Desktop<br><span>Health Guardian</span></h1>
+        <p data-i18n="hero.desc">BreakMate is a charming pixel-art companion that lives on your screen and protects your well-being with smart reminders for eye rest, hydration, posture, movement and stretching.</p>
+
+        <div class="cta-buttons">
+          <a href="https://apps.microsoft.com/detail/PLACEHOLDER_STORE_ID" class="btn btn-primary" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 21 21" fill="currentColor"><path d="M0 0h10v10H0zM11 0h10v10H11zM0 11h10v10H0zM11 11h10v10H11z"/></svg>
+            <span data-i18n="hero.cta">Get it on Microsoft Store</span>
+          </a>
+          <a href="#features" class="btn btn-secondary">
+            <span data-i18n="hero.learnMore">Learn More</span>
+          </a>
+        </div>
+
+        <p class="hero-sub-cta" data-i18n-html="hero.subCta"><strong>$2.99</strong> one-time purchase &middot; 7-day free trial included</p>
+
+        <div class="mascot-container">
+          <canvas id="hero-mascot" width="144" height="192" class="mascot-canvas"></canvas>
+          <div class="mascot-label" id="mascot-label"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TRUST BADGES ==================== -->
+    <section class="trust-badges reveal">
+      <div class="container">
+        <div class="badges-row">
+          <div class="badge-pill"><span class="badge-icon">&#128274;</span> <span data-i18n="badges.offline">100% Offline &amp; Private</span></div>
+          <div class="badge-pill"><span class="badge-icon">&#9889;</span> <span data-i18n="badges.lightweight">Ultra-lightweight (~4 MB)</span></div>
+          <div class="badge-pill"><span class="badge-icon">&#127873;</span> <span data-i18n="badges.trial">7-Day Free Trial</span></div>
+          <div class="badge-pill"><span class="badge-icon">&#127760;</span> <span data-i18n="badges.languages">15 Languages</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FEATURES ==================== -->
+    <section class="features reveal" id="features">
+      <div class="container">
+        <h2 class="section-title" data-i18n="features.title">Smart Health Reminders</h2>
+        <p class="section-subtitle" data-i18n="features.subtitle">Science-backed reminders delivered at the right time to keep you healthy while you work.</p>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">&#128065;&#65039;</div>
+            <h3 data-i18n="features.eyes.title">Eye Rest (20-20-20)</h3>
+            <p data-i18n="features.eyes.desc">Every 20 minutes, look at something 20 feet away for 20 seconds. Prevents digital eye strain and headaches.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">&#128167;</div>
+            <h3 data-i18n="features.water.title">Hydration Tracking</h3>
+            <p data-i18n="features.water.desc">Stay on top of your water intake with a built-in 8-glass daily goal tracker. Never forget to drink water again.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">&#128694;</div>
+            <h3 data-i18n="features.movement.title">Movement Alerts</h3>
+            <p data-i18n="features.movement.desc">Stand up and walk around. Sitting for hours increases cardiovascular risk. Regular movement breaks keep you energized.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">&#129496;</div>
+            <h3 data-i18n="features.posture.title">Posture Check</h3>
+            <p data-i18n="features.posture.desc">A gentle nudge to straighten up. Straight back, relaxed shoulders, feet on the floor. Your spine will thank you.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">&#129336;</div>
+            <h3 data-i18n="features.stretch.title">Stretching</h3>
+            <p data-i18n="features.stretch.desc">Quick desk stretches to prevent stiffness and RSI. Neck, wrists, back &mdash; all covered in seconds.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">&#9881;&#65039;</div>
+            <h3 data-i18n="features.custom.title">Fully Customizable</h3>
+            <p data-i18n="features.custom.desc">Set your own intervals for each reminder type (1&ndash;120 minutes). Snooze when you're in the zone. BreakMate adapts to you.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== APP PREVIEW ==================== -->
+    <section class="app-preview reveal" id="preview">
+      <div class="container">
+        <h2 class="section-title" data-i18n="preview.title">See BreakMate in Action</h2>
+        <p class="section-subtitle" data-i18n="preview.subtitle">Clean, non-intrusive reminders that blend seamlessly into your workflow.</p>
+        <div class="preview-grid">
+
+          <!-- Notification preview -->
+          <div class="preview-window">
+            <div class="preview-titlebar">
+              <div class="preview-dots"><span></span><span></span><span></span></div>
+              <span data-i18n="preview.healthReminder">Health Reminder</span>
+            </div>
+            <div class="preview-body">
+              <div class="notif-mockup">
+                <div class="notif-header">
+                  <span>&#129489;&#8205;&#128188;</span> BreakMate
+                </div>
+                <div class="notif-title" data-i18n-html="preview.notif.title">&#128065;&#65039; Time for an eye break!</div>
+                <div class="notif-text" data-i18n="preview.notif.text">Look at something 20 feet away for 20 seconds. Your eyes need a rest.</div>
+                <div class="notif-actions">
+                  <span class="notif-btn notif-btn-done" data-i18n-html="preview.notif.done">&#10003; Done</span>
+                  <span class="notif-btn notif-btn-snooze" data-i18n-html="preview.notif.snooze">&#9200; Snooze</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Water tracker preview -->
+          <div class="preview-window">
+            <div class="preview-titlebar">
+              <div class="preview-dots"><span></span><span></span><span></span></div>
+              <span data-i18n="preview.waterTracker">Daily Water Tracker</span>
+            </div>
+            <div class="preview-body">
+              <div class="water-mockup">
+                <div class="water-count">5 / 8</div>
+                <div class="water-label" data-i18n="preview.glassesToday">glasses today</div>
+                <div class="water-glasses">
+                  <div class="water-glass filled"></div>
+                  <div class="water-glass filled"></div>
+                  <div class="water-glass filled"></div>
+                  <div class="water-glass filled"></div>
+                  <div class="water-glass filled"></div>
+                  <div class="water-glass half"></div>
+                  <div class="water-glass"></div>
+                  <div class="water-glass"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Settings preview -->
+          <div class="preview-window">
+            <div class="preview-titlebar">
+              <div class="preview-dots"><span></span><span></span><span></span></div>
+              <span data-i18n="preview.settings">Settings</span>
+            </div>
+            <div class="preview-body">
+              <div class="settings-mockup">
+                <h4 data-i18n-html="preview.intervals">&#9881;&#65039; Reminder Intervals</h4>
+                <div class="setting-row">
+                  <span class="setting-label" data-i18n-html="preview.eyeRest">&#128065;&#65039; Eye Rest</span>
+                  <span class="setting-value">20 min</span>
+                </div>
+                <div class="setting-row">
+                  <span class="setting-label" data-i18n-html="preview.hydration">&#128167; Hydration</span>
+                  <span class="setting-value">30 min</span>
+                </div>
+                <div class="setting-row">
+                  <span class="setting-label" data-i18n-html="preview.movement">&#128694; Movement</span>
+                  <span class="setting-value">50 min</span>
+                </div>
+                <div class="setting-row">
+                  <span class="setting-label" data-i18n-html="preview.posture">&#129496; Posture</span>
+                  <span class="setting-value">30 min</span>
+                </div>
+                <div class="setting-row">
+                  <span class="setting-label" data-i18n-html="preview.stretching">&#129336; Stretching</span>
+                  <span class="setting-value">45 min</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- System tray preview -->
+          <div class="preview-window">
+            <div class="preview-titlebar">
+              <div class="preview-dots"><span></span><span></span><span></span></div>
+              <span data-i18n="preview.sysTray">System Tray</span>
+            </div>
+            <div class="preview-body">
+              <div class="tray-mockup">
+                <div class="tray-menu">
+                  <div class="tray-item" data-i18n-html="preview.trayShow">&#128065;&#65039; Show BreakMate</div>
+                  <div class="tray-sep"></div>
+                  <div class="tray-item" data-i18n-html="preview.traySettings">&#9881;&#65039; Settings</div>
+                  <div class="tray-sep"></div>
+                  <div class="tray-item" style="color:#c0392b;" data-i18n-html="preview.trayQuit">&#10006; Quit</div>
+                </div>
+                <p style="margin-top:12px;font-size:12px;color:#888;" data-i18n="preview.trayHint">Right-click the tray icon to access</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== HOW IT WORKS ==================== -->
+    <section class="how-it-works reveal">
+      <div class="container">
+        <h2 class="section-title" data-i18n="how.title">How It Works</h2>
+        <p class="section-subtitle" data-i18n="how.subtitle">Set it up once and let your companion take care of the rest.</p>
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <canvas id="step-1" width="96" height="128" class="step-sprite"></canvas>
+            <h3 data-i18n="how.step1.title">Install &amp; Launch</h3>
+            <p data-i18n="how.step1.desc">Quick install, no admin needed. Your companion appears on the desktop.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <canvas id="step-2" width="96" height="128" class="step-sprite"></canvas>
+            <h3 data-i18n="how.step2.title">Get Reminders</h3>
+            <p data-i18n="how.step2.desc">Hydration, eye rest, posture, movement, stretching &mdash; all on schedule.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <canvas id="step-3" width="96" height="128" class="step-sprite"></canvas>
+            <h3 data-i18n="how.step3.title">Follow the Guidance</h3>
+            <p data-i18n="how.step3.desc">Quick exercises and habit changes throughout your day.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <canvas id="step-4" width="96" height="128" class="step-sprite"></canvas>
+            <h3 data-i18n="how.step4.title">Build Healthy Habits</h3>
+            <p data-i18n="how.step4.desc">Track your daily statistics and watch your health improve.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PERFECT FOR ==================== -->
+    <section class="perfect-for reveal">
+      <div class="container">
+        <h2 class="section-title" data-i18n="audience.title">Perfect For</h2>
+        <div class="audience-grid">
+          <div class="audience-card">
+            <div class="audience-icon">&#128188;</div>
+            <h3 data-i18n="audience.office.title">Office Workers</h3>
+            <p data-i18n="audience.office.desc">Spending long hours at a desk? BreakMate has your back (literally).</p>
+          </div>
+          <div class="audience-card">
+            <div class="audience-icon">&#127968;</div>
+            <h3 data-i18n="audience.remote.title">Remote Workers</h3>
+            <p data-i18n="audience.remote.desc">No office ergonomic reminders? BreakMate fills the gap perfectly.</p>
+          </div>
+          <div class="audience-card">
+            <div class="audience-icon">&#128218;</div>
+            <h3 data-i18n="audience.students.title">Students</h3>
+            <p data-i18n="audience.students.desc">Studying for extended periods? Protect your eyes and posture.</p>
+          </div>
+          <div class="audience-card">
+            <div class="audience-icon">&#127918;</div>
+            <h3 data-i18n="audience.gamers.title">Gamers</h3>
+            <p data-i18n="audience.gamers.desc">Forget to take breaks during long sessions? Your companion won't.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== LANGUAGES ==================== -->
+    <section class="languages reveal">
+      <div class="container">
+        <h2 data-i18n="lang.title">Available in 15 Languages</h2>
+        <div class="language-flags">
+          <span title="English">&#127468;&#127463;</span>
+          <span title="Portugu&ecirc;s (Brasil)">&#127463;&#127479;</span>
+          <span title="Espa&ntilde;ol">&#127466;&#127480;</span>
+          <span title="Fran&ccedil;ais">&#127467;&#127479;</span>
+          <span title="Deutsch">&#127465;&#127466;</span>
+          <span title="Italiano">&#127470;&#127481;</span>
+          <span title="&#20013;&#25991;">&#127464;&#127475;</span>
+          <span title="&#26085;&#26412;&#35486;">&#127471;&#127477;</span>
+          <span title="&#54620;&#44397;&#50612;">&#127472;&#127479;</span>
+          <span title="&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;">&#127479;&#127482;</span>
+          <span title="&#2361;&#2367;&#2344;&#2381;&#2342;&#2368;">&#127470;&#127475;</span>
+          <span title="&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;">&#127480;&#127462;</span>
+          <span title="&#2476;&#2494;&#2434;&#2482;&#2494;">&#127463;&#127465;</span>
+          <span title="Nederlands">&#127475;&#127473;</span>
+          <span title="T&uuml;rk&ccedil;e">&#127481;&#127479;</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PRIVACY CALLOUT ==================== -->
+    <section class="privacy-callout reveal">
+      <div class="container">
+        <div class="privacy-card">
+          <div class="privacy-icon">&#128737;&#65039;</div>
+          <h2 data-i18n="privacy.title">Your Privacy, Guaranteed</h2>
+          <p data-i18n="privacy.desc">BreakMate works 100% offline. No accounts, no ads, no internet connection required. All your settings and statistics are stored locally on your device. Zero data collection, ever.</p>
+          <div class="privacy-features">
+            <span class="privacy-feat" data-i18n-html="privacy.noData">&#10003; No data collection</span>
+            <span class="privacy-feat" data-i18n-html="privacy.noAccounts">&#10003; No accounts</span>
+            <span class="privacy-feat" data-i18n-html="privacy.noAds">&#10003; No ads</span>
+            <span class="privacy-feat" data-i18n-html="privacy.worksOffline">&#10003; Works offline</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PRICING ==================== -->
+    <section class="pricing reveal" id="pricing">
+      <div class="container">
+        <h2 class="section-title" data-i18n="pricing.title">Simple Pricing</h2>
+        <p class="section-subtitle" data-i18n="pricing.subtitle">No subscriptions. No hidden fees. Just a one-time purchase.</p>
+        <div class="price-card">
+          <div class="price-tag" data-i18n="pricing.bestValue">BEST VALUE</div>
+          <div class="price">$2.99</div>
+          <div class="price-note" data-i18n="pricing.note">One-time purchase. Yours forever.</div>
+          <div class="price-trial" data-i18n-html="pricing.trial">&#127873; 7-day free trial included</div>
+          <ul class="price-features">
+            <li data-i18n="pricing.f1">All 5 health reminder types</li>
+            <li data-i18n="pricing.f2">15 languages included</li>
+            <li data-i18n="pricing.f3">Customizable intervals (1&ndash;120 min)</li>
+            <li data-i18n="pricing.f4">Daily health statistics</li>
+            <li data-i18n="pricing.f5">Cute pixel-art companion</li>
+            <li data-i18n="pricing.f6">Ultra-lightweight (~4 MB)</li>
+            <li data-i18n="pricing.f7">100% offline &amp; private</li>
+            <li data-i18n="pricing.f8">Lifetime updates</li>
+          </ul>
+          <a href="https://apps.microsoft.com/detail/PLACEHOLDER_STORE_ID" class="btn btn-primary" target="_blank" rel="noopener" style="width:100%;justify-content:center;">
+            <span data-i18n="pricing.cta">Start Free Trial</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FAQ ==================== -->
+    <section class="faq reveal" id="faq">
+      <div class="container">
+        <h2 class="section-title" data-i18n="faq.title">Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <details>
+            <summary data-i18n="faq.q1">Is BreakMate really free to try?</summary>
+            <div class="faq-answer" data-i18n="faq.a1">Yes! BreakMate comes with a 7-day free trial from the Microsoft Store. You can experience all features with no limitations. After the trial, it's a one-time purchase of $2.99 &mdash; no subscriptions, no recurring charges.</div>
+          </details>
+          <details>
+            <summary data-i18n="faq.q2">Does BreakMate collect any data?</summary>
+            <div class="faq-answer" data-i18n-html="faq.a2">Absolutely not. BreakMate is 100% offline. It never connects to the internet, never creates accounts, and never collects or transmits any data. All your settings and statistics are stored locally on your device. You can read our full <a href="privacy.html" style="color:#4A90D9;">privacy policy</a> for details.</div>
+          </details>
+          <details>
+            <summary data-i18n="faq.q3">What health reminders does BreakMate include?</summary>
+            <div class="faq-answer" data-i18n="faq.a3">BreakMate includes 5 science-backed reminder types: Eye Rest (20-20-20 rule), Hydration Tracking (8-glass daily goal), Movement Alerts, Posture Checks, and Stretching exercises. Each can be customized with intervals from 1 to 120 minutes.</div>
+          </details>
+          <details>
+            <summary data-i18n="faq.q4">Can I customize the reminder intervals?</summary>
+            <div class="faq-answer" data-i18n="faq.a4">Yes! Every reminder type has its own customizable interval from 1 to 120 minutes. You can also snooze any reminder when you're in the zone. Right-click the system tray icon to access Settings at any time.</div>
+          </details>
+          <details>
+            <summary data-i18n="faq.q5">What are the system requirements?</summary>
+            <div class="faq-answer" data-i18n="faq.a5">BreakMate requires Windows 10 version 1803 or later (x64 architecture). It's ultra-lightweight at approximately 4 MB and uses minimal system resources. No admin rights are required for installation.</div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-left">
+        <p data-i18n="footer.copy">&copy; 2025&ndash;2026 BreakMate. All rights reserved.</p>
+        <p class="sys-req" data-i18n="footer.sysReq">Windows 10 1803+ &middot; x64 &middot; ~4 MB &middot; No admin required</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="https://apps.microsoft.com/detail/PLACEHOLDER_STORE_ID" target="_blank" rel="noopener">Microsoft Store</a></li>
+        <li><a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
+        <li><a href="https://github.com/aleapc/breakmate/issues" target="_blank" rel="noopener" data-i18n="footer.support">Support</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    // === SPRITE DATA (from sprite-data.json) ===
+    const COLORS = {
+      skin: '#FFCC99', skinShadow: '#E6AA77',
+      hat: '#4A90D9', hatLight: '#6BB5FF',
+      shirt: '#E74C3C', shirtShadow: '#C0392B',
+      pants: '#2C3E50', pantsShadow: '#1A252F',
+      shoes: '#8B4513', eyes: '#2C3E50',
+      mouth: '#C0392B', hair: '#5D4037',
+      outline: '#1A1A2E', white: '#FFFFFF',
+      water: '#3498DB', waterLight: '#5DADE2',
+      sparkle: '#F1C40F'
+    };
+
+    const PIXEL_MAP = {
+      'o': 'outline', 's': 'skin', 'S': 'skinShadow',
+      'h': 'hat', 'H': 'hatLight', 'r': 'shirt',
+      'R': 'shirtShadow', 'p': 'pants', 'P': 'pantsShadow',
+      'b': 'shoes', 'e': 'eyes', 'm': 'mouth',
+      'a': 'hair', 'w': 'white', 'W': 'water',
+      'L': 'waterLight', 'k': 'sparkle'
+    };
+
+    const SPRITES = {
+      idle1: [
+        '....ooooo...',
+        '...oHHHHho..',
+        '..oHHHHHHo..',
+        '..ohhhhhho..',
+        '..osseesso..',
+        '..ossmmsso..',
+        '...osssso...',
+        '...orrro....',
+        '..orrrrro...',
+        '..orsrrro...',
+        '..orrrrro...',
+        '...opppo....',
+        '..opppppo...',
+        '..op...po...',
+        '..ob...bo...',
+        '..oo...oo...',
+      ],
+      idle2: [
+        '............',
+        '....ooooo...',
+        '...oHHHHho..',
+        '..oHHHHHHo..',
+        '..ohhhhhho..',
+        '..osseesso..',
+        '..ossmmsso..',
+        '...osssso...',
+        '...orrro....',
+        '..orrrrro...',
+        '..orsrrro...',
+        '..orrrrro...',
+        '...opppo....',
+        '..opppppo...',
+        '..ob...bo...',
+        '..oo...oo...',
+      ],
+      walk1: [
+        '....ooooo...',
+        '...oHHHHho..',
+        '..oHHHHHHo..',
+        '..ohhhhhho..',
+        '..osseesso..',
+        '..ossmmsso..',
+        '...osssso...',
+        '...orrro....',
+        '..orrrrro...',
+        '..orrrrro...',
+        '..orrrrro...',
+        '...opppo....',
+        '..oppppo....',
+        '..ob..po....',
+        '..oo..bo....',
+        '......oo....',
+      ],
+      walk2: [
+        '....ooooo...',
+        '...oHHHHho..',
+        '..oHHHHHHo..',
+        '..ohhhhhho..',
+        '..osseesso..',
+        '..ossmmsso..',
+        '...osssso...',
+        '...orrro....',
+        '..orrrrro...',
+        '..orrrrro...',
+        '..orrrrro...',
+        '...opppo....',
+        '....opppo...',
+        '....op..bo..',
+        '....bo..oo..',
+        '....oo......',
+      ],
+      wave1: [
+        '....ooooo...',
+        '...oHHHHho..',
+        '..oHHHHHHo..',
+        '..ohhhhhho..',
+        '..osseesso..',
+        '..ossmmss...',
+        '...osssso.os',
+        '...orrro.os.',
+        '..orrrrros..',
+        '..orsrrro...',
+        '..orrrrro...',
+        '...opppo....',
+        '..opppppo...',
+        '..op...po...',
+        '..ob...bo...',
+        '..oo...oo...',
+      ],
+      wave2: [
+        '....ooooo.os',
+        '...oHHHHhoos',
+        '..oHHHHHHo..',
+        '..ohhhhhho..',
+        '..osseesso..',
+        '..ossmmss...',
+        '...ossss.os.',
+        '...orrro.o..',
+        '..orrrrro...',
+        '..orsrrro...',
+        '..orrrrro...',
+        '...opppo....',
+        '..opppppo...',
+        '..op...po...',
+        '..ob...bo...',
+        '..oo...oo...',
+      ],
+      water: [
+        '....ooooo...',
+        '...oHHHHho..',
+        '..oHHHHHHo..',
+        '..ohhhhhho..',
+        '..osseesso..',
+        '..ossmmsso..',
+        '...osssso...',
+        '...orrro.ooo',
+        '..orrrrroWWo',
+        '..orsrrroWWo',
+        '..orrrrr.oWo',
+        '...opppo.ooo',
+        '..opppppo...',
+        '..op...po...',
+        '..ob...bo...',
+        '..oo...oo...',
+      ],
+      stretch: [
+        '.os.ooooo.so',
+        '.os.HHHHhso.',
+        '..oHHHHHHo..',
+        '..ohhhhhho..',
+        '..osseesso..',
+        '..ossmmsso..',
+        '.sossssssos.',
+        'os.orrro..so',
+        '...orrro....',
+        '...orrro....',
+        '...orrro....',
+        '...opppo....',
+        '..opppppo...',
+        '..op...po...',
+        '..ob...bo...',
+        '..oo...oo...',
+      ],
+      posture: [
+        '....ooooo...',
+        '...oHHHHho..',
+        '..oHHHHHHo..',
+        '..ohhhhhho..',
+        '..ossossso..',
+        '..oeseesso..',
+        '..ossmmsso..',
+        '...osssso...',
+        '...orrro....',
+        '..orrrrro...',
+        '..orrrrro...',
+        '..orrrrro...',
+        '...opppo....',
+        '..opppppo...',
+        '..ob...bo...',
+        '..oo...oo...',
+      ],
+      eyerest: [
+        '....ooooo...',
+        '...oHHHHho..',
+        '..oHHHHHHo..',
+        '..ohhhhhho..',
+        '..osssssso..',
+        '..oseseeso..',
+        '..ossmmsso..',
+        '...osssso...',
+        '...orrro....',
+        '..orrrrro...',
+        '..orsrrro...',
+        '..orrrrro...',
+        '...opppo....',
+        '..opppppo...',
+        '..ob...bo...',
+        '..oo...oo...',
+      ],
+    };
+
+    // === SPRITE RENDERER ===
+    function drawSprite(ctx, spriteName, scale, offsetX, offsetY) {
+      const sprite = SPRITES[spriteName];
+      if (!sprite) return;
+      offsetX = offsetX || 0;
+      offsetY = offsetY || 0;
+      for (let row = 0; row < sprite.length; row++) {
+        for (let col = 0; col < sprite[row].length; col++) {
+          const ch = sprite[row][col];
+          if (ch === '.') continue;
+          const colorKey = PIXEL_MAP[ch];
+          if (!colorKey || !COLORS[colorKey]) continue;
+          ctx.fillStyle = COLORS[colorKey];
+          ctx.fillRect(offsetX + col * scale, offsetY + row * scale, scale, scale);
+        }
+      }
+    }
+
+    function drawOnCanvas(canvasId, spriteName, scale) {
+      const canvas = document.getElementById(canvasId);
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawSprite(ctx, spriteName, scale, 0, 0);
+    }
+
+    // === HERO MASCOT ANIMATION ===
+    const heroCanvas = document.getElementById('hero-mascot');
+    const heroCtx = heroCanvas.getContext('2d');
+    const labelEl = document.getElementById('mascot-label');
+
+    const ANIM_SEQUENCE = [
+      { sprite: 'idle1',   duration: 1500, label: '' },
+      { sprite: 'idle2',   duration: 1000, label: '' },
+      { sprite: 'idle1',   duration: 500,  label: '' },
+      { sprite: 'wave1',   duration: 600,  label: 'Hi there!' },
+      { sprite: 'wave2',   duration: 600,  label: 'Hi there!' },
+      { sprite: 'wave1',   duration: 600,  label: 'Hi there!' },
+      { sprite: 'wave2',   duration: 600,  label: 'Hi there!' },
+      { sprite: 'idle1',   duration: 800,  label: '' },
+      { sprite: 'water',   duration: 1200, label: 'Stay hydrated!' },
+      { sprite: 'water',   duration: 1200, label: 'Stay hydrated!' },
+      { sprite: 'idle1',   duration: 800,  label: '' },
+      { sprite: 'eyerest', duration: 1200, label: 'Rest your eyes' },
+      { sprite: 'eyerest', duration: 1200, label: 'Rest your eyes' },
+      { sprite: 'idle1',   duration: 800,  label: '' },
+      { sprite: 'stretch', duration: 1200, label: 'Time to stretch!' },
+      { sprite: 'stretch', duration: 1200, label: 'Time to stretch!' },
+      { sprite: 'idle1',   duration: 800,  label: '' },
+      { sprite: 'posture', duration: 1200, label: 'Check your posture' },
+      { sprite: 'posture', duration: 1000, label: 'Check your posture' },
+      { sprite: 'idle1',   duration: 800,  label: '' },
+      { sprite: 'walk1',   duration: 500,  label: 'Get moving!' },
+      { sprite: 'walk2',   duration: 500,  label: 'Get moving!' },
+      { sprite: 'walk1',   duration: 500,  label: 'Get moving!' },
+      { sprite: 'walk2',   duration: 500,  label: 'Get moving!' },
+      { sprite: 'idle1',   duration: 1500, label: '' },
+    ];
+
+    let seqIdx = 0;
+    let seqTimer = 0;
+    let lastTime = 0;
+
+    function animateHero(timestamp) {
+      if (!lastTime) lastTime = timestamp;
+      const dt = timestamp - lastTime;
+      lastTime = timestamp;
+      seqTimer += dt;
+
+      const step = ANIM_SEQUENCE[seqIdx];
+      if (seqTimer >= step.duration) {
+        seqTimer = 0;
+        seqIdx = (seqIdx + 1) % ANIM_SEQUENCE.length;
+      }
+
+      const current = ANIM_SEQUENCE[seqIdx];
+      heroCtx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
+      drawSprite(heroCtx, current.sprite, 12, 0, 0);
+      labelEl.textContent = current.label;
+
+      requestAnimationFrame(animateHero);
+    }
+
+    requestAnimationFrame(animateHero);
+
+    // === STATIC STEP SPRITES ===
+    drawOnCanvas('step-1', 'idle1', 8);
+    drawOnCanvas('step-2', 'water', 8);
+    drawOnCanvas('step-3', 'stretch', 8);
+    drawOnCanvas('step-4', 'wave1', 8);
+
+    // === HAMBURGER MENU ===
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+      const isActive = hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', isActive);
+    });
+
+    // Close menu on link click
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // === SCROLL REVEAL ===
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // === I18N MASCOT LABEL BRIDGE ===
+    // Store original English labels for remapping
+    const ORIG_LABELS = ANIM_SEQUENCE.map(s => s.label);
+    const LABEL_KEY_MAP = {
+      'Hi there!': 'mascot.hi',
+      'Stay hydrated!': 'mascot.water',
+      'Rest your eyes': 'mascot.eyes',
+      'Time to stretch!': 'mascot.stretch',
+      'Check your posture': 'mascot.posture',
+      'Get moving!': 'mascot.move',
+    };
+    window.updateMascotLabels = function(translations) {
+      ANIM_SEQUENCE.forEach((step, i) => {
+        const origLabel = ORIG_LABELS[i];
+        if (origLabel && LABEL_KEY_MAP[origLabel]) {
+          step.label = translations[LABEL_KEY_MAP[origLabel]] || origLabel;
+        }
+      });
+    };
+  </script>
+  <script src="i18n.js"></script>
+
+</body>
+</html>
